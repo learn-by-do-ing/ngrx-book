@@ -1,17 +1,19 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { NavBarComponent } from './core/components/nav-bar.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, NavBarComponent],
   template: `
-    <h1>Welcome to {{title}}!</h1>
+    <app-nav-bar />
 
-    <router-outlet />
+    <div class="max-w-screen-xl mx-6 xl:mx-auto ">
+      <router-outlet></router-outlet>
+    </div>
   `,
   styles: [],
 })
 export class AppComponent {
-  title = 'ngrx-demo';
 }
