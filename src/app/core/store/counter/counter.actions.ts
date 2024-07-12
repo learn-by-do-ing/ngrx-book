@@ -1,4 +1,4 @@
-import { createAction, createActionGroup, emptyProps, props } from '@ngrx/store';
+import { createActionGroup, emptyProps, props } from '@ngrx/store';
 
 export const CounterActions = createActionGroup({
   source: 'Counter',
@@ -6,5 +6,6 @@ export const CounterActions = createActionGroup({
     'Increment': emptyProps(),
     'Decrement': props<{ value: number }>(),
     'Reset': emptyProps(),
+    'Update Multiplier': props<{ value: number }>(),
   }
 });
