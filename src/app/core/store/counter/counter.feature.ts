@@ -11,16 +11,16 @@ export const counterFeature = createFeature({
   name: 'counter',
   reducer: createReducer(
     initialState,
-    on(CounterActions.increment, (state) => ({  value: state.value + 1  })),
+    on(CounterActions.increment, (state): CounterState => ({  value: state.value + 1  })),
     // on(CounterActions.decrement, (state, action) => ({ value: state.value - action.value})),
-    on(CounterActions.decrement, (state, action) => {
+    on(CounterActions.decrement, (state, action): CounterState => {
       const nextValue = state.value - action.value
       return {
         value: nextValue < 0 ? 0 : nextValue
       }
     }),
 
-    on(CounterActions.reset, () => ({ value: 0})),
+    on(CounterActions.reset, (): CounterState => ({ value: 0})),
   )
 })
 export const {
