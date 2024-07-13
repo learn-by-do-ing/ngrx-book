@@ -1,7 +1,7 @@
 // app.routes.ts
 import { Routes } from '@angular/router';
 import { provideState } from '@ngrx/store';
-import { counterFeature } from './core/store/counter/counter.feature';
+import { counterFeature } from './features/counter/store/counter.feature';
 
 export const routes: Routes = [
   { path: 'shop', loadComponent: () => import('./features/shop/shop.component')},
