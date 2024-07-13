@@ -1,7 +1,9 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { CartActions } from '../../core/store/cart/cart.actions';
 import { ProductsActions } from '../../core/store/products/products.actions';
 import { selectList } from '../../core/store/products/products.feature';
+import { Product } from '../../model/product';
 
 @Component({
   selector: 'app-shop',
@@ -15,7 +17,12 @@ import { selectList } from '../../core/store/products/products.feature';
           <div class="card-body">
             <h2 class="card-title">{{product.name}}</h2>
             <div class="card-actions justify-end">
-              <button class="btn btn-outline btn-primary">Add to Cart  | € {{product.cost}}</button>
+              <button
+                class="btn btn-outline btn-primary"
+                (click)="addProductToCart(product)"
+              >
+                Add to Cart  | € {{product.cost}}
+              </button>
             </div>
           </div>
         </div>
@@ -29,5 +36,10 @@ export default class ShopComponent implements OnInit {
 
   ngOnInit() {
     this.store.dispatch(ProductsActions.load())
+  }
+
+  // NEW
+  addProductToCart(product: Product) {
+    this.store.dispatch(CartActions.add({item:  product}))
   }
 }
