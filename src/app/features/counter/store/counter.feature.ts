@@ -23,7 +23,7 @@ export const counterFeature = createFeature({
     }),
 
     on(CounterActions.reset, (state): CounterState => ({ ...state, value: 0})),
-    on(CounterActions.updateMultiplier, (state, action) => ({ ...state, multiplier: action.value })),
+    on(CounterActions.updateMultiplier, (state, action): CounterState => ({ ...state, multiplier: action.value })),
   ),
   extraSelectors: ({ selectValue, selectMultiplier }) => ({
     selectTotal: createSelector(
