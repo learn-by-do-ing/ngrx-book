@@ -10,6 +10,8 @@ import { cartFeature } from './core/store/cart/cart.feature';
 import * as productsEffects from './core/store/products/products.effects';
 import * as cartEffects from './core/store/cart/cart.effects';
 import { productsFeature } from './core/store/products/products.feature';
+import { shopFiltersFeature } from './core/store/shop/shop-filters.feature';
+import { UIFeature } from './core/store/ui/ui.feature';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -25,7 +27,9 @@ export const appConfig: ApplicationConfig = {
     }),
     provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),
     provideState({ name: productsFeature.name, reducer: productsFeature.reducer }),
-    provideState({ name: 'cart', reducer: cartFeature.reducer }),
+    provideState({ name: cartFeature.name, reducer: cartFeature.reducer }),
+    provideState({ name: shopFiltersFeature.name, reducer: shopFiltersFeature.reducer }),
+    provideState({ name: UIFeature.name, reducer: UIFeature.reducer }),
     provideEffects([
       productsEffects,
       cartEffects

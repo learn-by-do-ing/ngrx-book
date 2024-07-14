@@ -1,12 +1,14 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, effect, inject, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { CartActions } from '../../core/store/cart/cart.actions';
 import { ProductsActions } from '../../core/store/products/products.actions';
-import { selectList } from '../../core/store/products/products.feature';
+import { ShopFiltersActions } from '../../core/store/shop/shop-filters.actions';
+import { selectFilteredList, selectShopFiltersState } from '../../core/store/shop/shop-filters.feature';
+import { UiActions } from '../../core/store/ui/ui.actions';
+import { selectSidePanelOpened } from '../../core/store/ui/ui.feature';
 import { Product } from '../../model/product';
 import { ShopFilters } from '../../model/shop-filters';
 import { ShopFiltersComponent } from './components/shop-filters.component';
-import { ShopFiltersActions } from './store/shop-filters';
 
 @Component({
   selector: 'app-shop',
@@ -15,7 +17,17 @@ import { ShopFiltersActions } from './store/shop-filters';
     ShopFiltersComponent
   ],
   template: `
-    <app-shop-filters (changeFilters)="updateFilter($event)" />
+    <app-shop-filters 
+      [isOpen]="isOpen()"
+      [filters]="filters()"
+      (changeFilters)="updateFilter($event)"
+      (close)="closePanel()"
+    />
+
+    <div class="flex justify-center m-6">
+      <button class="btn" (click)="togglePanel()">FILTERS</button>
+    </div>
+
     
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
       @for (product of products(); track product.id) {
@@ -40,8 +52,15 @@ import { ShopFiltersActions } from './store/shop-filters';
 })
 export default class ShopComponent implements OnInit {
   store = inject(Store)
-  products = this.store.selectSignal(selectList)
+  products = this.store.selectSignal(selectFilteredList)
+  isOpen = this.store.selectSignal(selectSidePanelOpened)
+  filters = this.store.selectSignal(selectShopFiltersState)
 
+  constructor() {
+    effect(() => {
+      console.log(this.filters())
+    });
+  }
   ngOnInit() {
     this.store.dispatch(ProductsActions.load())
   }
@@ -53,4 +72,13 @@ export default class ShopComponent implements OnInit {
   updateFilter(filters: Partial<ShopFilters>) {
     this.store.dispatch(ShopFiltersActions.update({ filters }))
   }
+
+  togglePanel() {
+    this.store.dispatch(UiActions.toggleSidePanel())
+  }
+
+  closePanel() {
+    this.store.dispatch(UiActions.closeSidePanel())
+  }
+
 }

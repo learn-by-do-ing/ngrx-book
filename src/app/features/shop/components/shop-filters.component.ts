@@ -1,5 +1,5 @@
-import { JsonPipe } from '@angular/common';
-import { Component, inject, output } from '@angular/core';
+import { JsonPipe, NgClass } from '@angular/common';
+import { Component, effect, inject, input, output } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { debounceTime } from 'rxjs';
 import { ShopFilters } from '../../../model/shop-filters';
@@ -9,15 +9,23 @@ import { ShopFilters } from '../../../model/shop-filters';
   standalone: true,
   imports: [
     JsonPipe,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgClass
   ],
   template: `
     <div
-      class="fixed w-96 top-0 right-0 h-full bg-slate-700 z-10 shadow-lg"
+      class="fixed w-96 top-0 right-0 h-full bg-slate-700 z-10 shadow-lg transition-all"
+      [ngClass]="{
+       'right-0': isOpen(),
+       '-right-96': !isOpen(),
+     }"
     >
       <form class="flex flex-col gap-4 m-6" [formGroup]="form">
-        <h1 class="text-2xl font-bold">FILTERS</h1>
-
+        <div class="flex justify-between">
+          <h1 class="text-2xl font-bold">FILTERS</h1>
+          <button (click)="close.emit()">❌</button>
+        </div>
+        
         <input
           type="text" placeholder="Search here" class="input input-bordered w-full"
           formControlName="text"
@@ -73,9 +81,10 @@ import { ShopFilters } from '../../../model/shop-filters';
 })
 export class ShopFiltersComponent  {
   fb = inject(FormBuilder)
-
-  // NEW
   changeFilters = output<Partial<ShopFilters>>()
+  isOpen = input.required()
+  filters = input.required<ShopFilters>() // NEW
+  close = output()
 
   form = this.fb.nonNullable.group({
     text: '',
@@ -85,8 +94,15 @@ export class ShopFiltersComponent  {
     paper: false
   })
 
-  // NEW
   constructor() {
+    // NEW
+    effect(() => {
+      const filters = this.filters();
+      if (filters) {
+        this.form.patchValue(filters, { emitEvent: false });
+      }
+    });
+
     this.form.valueChanges
       .pipe(
         debounceTime(1000)
