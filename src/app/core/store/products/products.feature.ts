@@ -17,15 +17,15 @@ export const productsFeature = createFeature({
   name: 'products',
   reducer: createReducer(
     initialState,
-    on(ProductsActions.load, (state) => ({
+    on(ProductsActions.load, (state): ProductsState => ({
       ...state, pending: true, hasError: false
     })),
-    on(ProductsActions.loadSuccess, (state, action) => ({
+    on(ProductsActions.loadSuccess, (state, action): ProductsState => ({
       ...state, list: [...action.items],
       pending: false,
       hasError: false
     })),
-    on(ProductsActions.loadFail, (state) => ({
+    on(ProductsActions.loadFail, (state): ProductsState => ({
       ...state,
       hasError: true,
       pending: false

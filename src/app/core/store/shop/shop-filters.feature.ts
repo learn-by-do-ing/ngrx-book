@@ -15,7 +15,7 @@ export const shopFiltersFeature = createFeature({
   name: 'shopFilters',
   reducer: createReducer(
     initialState,
-    on(ShopFiltersActions.update, (state, action) => ({
+    on(ShopFiltersActions.update, (state, action): ShopFilters => ({
       ...state, ...action.filters
     })),
   ),

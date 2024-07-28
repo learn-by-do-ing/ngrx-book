@@ -32,8 +32,9 @@ import { ShopFilters } from '../../../model/shop-filters';
         />
 
         <!--COST FILTER-->
-        <label class="font-bold">MAX PRICE Price (€ {{ form.get('cost')?.value }})</label>
+        <label class="font-bold" for="costInput">MAX PRICE Price (€ {{ form.get('cost')?.value }})</label>
         <input
+          id="costInput"
           type="range" min="2" max="10" value="10" class="range" step="2"
           formControlName="cost"
         />
@@ -48,7 +49,7 @@ import { ShopFilters } from '../../../model/shop-filters';
         <br>
 
         <!--MATERIAL FILTER-->
-        <label class="font-bold">MATERIAL</label>
+        <div class="font-bold">MATERIAL</div>
 
         <div class="form-control">
           <label class="label cursor-pointer">
@@ -107,7 +108,7 @@ export class ShopFiltersComponent  {
       .pipe(
         debounceTime(1000)
       )
-      .subscribe(data => {
+      .subscribe(() => {
         this.changeFilters.emit(this.form.value)
       })
   }

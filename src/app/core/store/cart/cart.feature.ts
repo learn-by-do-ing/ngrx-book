@@ -14,13 +14,13 @@ export const cartFeature = createFeature({
   name: 'cart',
   reducer: createReducer(
     initialState,
-    on(CartActions.loadedFromLocalStorage, (state, action) => {
+    on(CartActions.loadedFromLocalStorage, (state, action): CartState => {
       return ({
         ...state,
         list: action.items
       })
     }),
-    on(CartActions.add, (state, action) => {
+    on(CartActions.add, (state, action): CartState => {
       const productAlreadyInCart = state.list.find(item => item.product.id === action.item.id);
 
       if (productAlreadyInCart) {
@@ -38,18 +38,18 @@ export const cartFeature = createFeature({
         })
       }
     }),
-    on(CartActions.remove, (state, action) => ({
+    on(CartActions.remove, (state, action): CartState => ({
       ...state,
       list: state.list.filter(item => item.product.id !== action.id)
     })),
-    on(CartActions.increaseQuantity, (state, action) => {
+    on(CartActions.increaseQuantity, (state, action): CartState => {
       return ({
         ...state, list: state.list.map(item => {
           return item.product.id === action.id ? {...item, qty: item.qty + 1} : item;
         })
       })
     }),
-    on(CartActions.decreaseQuantity, (state, action) => {
+    on(CartActions.decreaseQuantity, (state, action): CartState => {
       const productAlreadyInCart = state.list.find(item => item.product.id === action.id);
       if (productAlreadyInCart && productAlreadyInCart.qty > 1) {
         // decrease

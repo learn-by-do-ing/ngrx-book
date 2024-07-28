@@ -17,7 +17,7 @@ export const loadProducts = createEffect((
             map((items) =>
               ProductsActions.loadSuccess({ items })
             ),
-            catchError((error) =>
+            catchError(() =>
               of(ProductsActions.loadFail())
             )
           )
