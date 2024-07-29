@@ -1,4 +1,5 @@
 import { Component, inject } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { CartActions } from '../../core/store/cart/cart.actions';
 import { selectIsCartEmpty, selectList, selectTotalCartCost, selectTotalCartItems } from '../../core/store/cart/cart.feature';
@@ -9,10 +10,10 @@ import { CartItem } from '../../model/cart-item';
   standalone: true,
   template: `
 
-    @if(isCartEmpty()) {
+    @if (isCartEmpty()) {
       <div class="alert alert-error">Your Cart is Empty</div>
     } @else {
-      <h1 class="text-xl my-6 font-bold ">Cart ({{totalCartItems()}} products)</h1>
+      <h1 class="text-xl my-6 font-bold ">Cart ({{ totalCartItems() }} products)</h1>
 
       <div class="overflow-x-auto">
         <table class="table">
@@ -23,16 +24,16 @@ import { CartItem } from '../../model/cart-item';
                 <th>
                   <img [src]="item.product.image" [alt]="item.product.name" width="100">
                 </th>
-                <td>{{item.product.name}}</td>
+                <td>{{ item.product.name }}</td>
                 <td>
                   <div class="flex gap-3 items-center">
-                    € {{item.product.cost}} x {{item.qty}}
+                    € {{ item.product.cost }} x {{ item.qty }}
                     <button class="btn" (click)="decreaseQty(item.product.id)">-</button>
                     <button class="btn" (click)="increaseQty(item.product.id)">+</button>
                   </div>
                 </td>
                 <td class="text-right">
-                  € {{item.product.cost * item.qty}}
+                  € {{ item.product.cost * item.qty }}
                   <button class="btn btn-warning mx-2" (click)="deleteItem(item)">Delete</button>
                 </td>
               </tr>
@@ -42,13 +43,23 @@ import { CartItem } from '../../model/cart-item';
           </tbody>
         </table>
       </div>
-      
-      <div class="text-xl my-6 font-bold">
-        total:  € {{totalCost()}}
+
+      <div class="flex justify-between my-6 py-6 border-t border-slate-600">
+        <div class="text-3xl my-6 font-bold">
+          total: € {{ totalCost() }}
+        </div>
+        <div>
+          <button class="btn btn-lg btn-info" routerLink="/order-form">
+            Proceed
+          </button>
+        </div>
       </div>
     }
 
   `,
+  imports: [
+    RouterLink
+  ]
 })
 export default class CartComponent {
   store = inject(Store);

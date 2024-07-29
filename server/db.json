@@ -124,5 +124,279 @@
       "image": "https://res.cloudinary.com/my-notes-demo/image/upload/v1712217750/tutorial-content/video-corsi/ngrx/image-keychains/tape.jpg",
       "type": "paper"
     }
+  ],
+  "orders": [
+    {
+      "user": {
+        "email": "mario@rossi.com",
+        "address": "Via ABC 123",
+        "city": "Milan",
+        "state": "Italy",
+        "zip": "12345"
+      },
+      "cart": [
+        {
+          "product": {
+            "id": 1,
+            "name": "GitHub #1",
+            "cost": 3,
+            "image": "https://res.cloudinary.com/my-notes-demo/image/upload/v1712149831/tutorial-content/video-corsi/ngrx/image-keychains/github-2.jpg",
+            "type": "wood"
+          },
+          "qty": 1
+        },
+        {
+          "product": {
+            "id": 2,
+            "name": "GitHub #2",
+            "cost": 3,
+            "image": "https://res.cloudinary.com/my-notes-demo/image/upload/v1712149830/tutorial-content/video-corsi/ngrx/image-keychains/github-1.jpg",
+            "type": "wood"
+          },
+          "qty": 3
+        },
+        {
+          "product": {
+            "id": 3,
+            "name": "Angular #1",
+            "cost": 3,
+            "image": "https://res.cloudinary.com/my-notes-demo/image/upload/v1712149827/tutorial-content/video-corsi/ngrx/image-keychains/angular-1.jpg",
+            "type": "wood"
+          },
+          "qty": 1
+        },
+        {
+          "product": {
+            "id": 5,
+            "name": "React",
+            "cost": 3,
+            "image": "https://res.cloudinary.com/my-notes-demo/image/upload/v1712149835/tutorial-content/video-corsi/ngrx/image-keychains/react.jpg",
+            "type": "wood"
+          },
+          "qty": 1
+        }
+      ],
+      "id": 1
+    },
+    {
+      "user": {
+        "email": "Mario",
+        "address": "efwe",
+        "city": "efw",
+        "state": "ewfew",
+        "zip": "wefwe"
+      },
+      "cart": [
+        {
+          "product": {
+            "id": 1,
+            "name": "GitHub #1",
+            "cost": 3,
+            "image": "https://res.cloudinary.com/my-notes-demo/image/upload/v1712149831/tutorial-content/video-corsi/ngrx/image-keychains/github-2.jpg",
+            "type": "wood"
+          },
+          "qty": 1
+        },
+        {
+          "product": {
+            "id": 2,
+            "name": "GitHub #2",
+            "cost": 3,
+            "image": "https://res.cloudinary.com/my-notes-demo/image/upload/v1712149830/tutorial-content/video-corsi/ngrx/image-keychains/github-1.jpg",
+            "type": "wood"
+          },
+          "qty": 3
+        },
+        {
+          "product": {
+            "id": 3,
+            "name": "Angular #1",
+            "cost": 3,
+            "image": "https://res.cloudinary.com/my-notes-demo/image/upload/v1712149827/tutorial-content/video-corsi/ngrx/image-keychains/angular-1.jpg",
+            "type": "wood"
+          },
+          "qty": 1
+        },
+        {
+          "product": {
+            "id": 5,
+            "name": "React",
+            "cost": 3,
+            "image": "https://res.cloudinary.com/my-notes-demo/image/upload/v1712149835/tutorial-content/video-corsi/ngrx/image-keychains/react.jpg",
+            "type": "wood"
+          },
+          "qty": 1
+        }
+      ],
+      "id": 2
+    },
+    {
+      "user": {
+        "email": "ewfwe",
+        "address": "wefewew",
+        "city": "wefw",
+        "state": "ewfew",
+        "zip": "few"
+      },
+      "cart": [
+        {
+          "product": {
+            "id": 1,
+            "name": "GitHub #1",
+            "cost": 3,
+            "image": "https://res.cloudinary.com/my-notes-demo/image/upload/v1712149831/tutorial-content/video-corsi/ngrx/image-keychains/github-2.jpg",
+            "type": "wood"
+          },
+          "qty": 1
+        },
+        {
+          "product": {
+            "id": 2,
+            "name": "GitHub #2",
+            "cost": 3,
+            "image": "https://res.cloudinary.com/my-notes-demo/image/upload/v1712149830/tutorial-content/video-corsi/ngrx/image-keychains/github-1.jpg",
+            "type": "wood"
+          },
+          "qty": 3
+        },
+        {
+          "product": {
+            "id": 3,
+            "name": "Angular #1",
+            "cost": 3,
+            "image": "https://res.cloudinary.com/my-notes-demo/image/upload/v1712149827/tutorial-content/video-corsi/ngrx/image-keychains/angular-1.jpg",
+            "type": "wood"
+          },
+          "qty": 1
+        },
+        {
+          "product": {
+            "id": 5,
+            "name": "React",
+            "cost": 3,
+            "image": "https://res.cloudinary.com/my-notes-demo/image/upload/v1712149835/tutorial-content/video-corsi/ngrx/image-keychains/react.jpg",
+            "type": "wood"
+          },
+          "qty": 1
+        }
+      ],
+      "id": 3
+    },
+    {
+      "user": {
+        "email": "wefwe",
+        "address": "wewefew",
+        "city": "wefew",
+        "state": "wefew",
+        "zip": "few"
+      },
+      "cart": [
+        {
+          "product": {
+            "id": 1,
+            "name": "GitHub #1",
+            "cost": 3,
+            "image": "https://res.cloudinary.com/my-notes-demo/image/upload/v1712149831/tutorial-content/video-corsi/ngrx/image-keychains/github-2.jpg",
+            "type": "wood"
+          },
+          "qty": 1
+        },
+        {
+          "product": {
+            "id": 2,
+            "name": "GitHub #2",
+            "cost": 3,
+            "image": "https://res.cloudinary.com/my-notes-demo/image/upload/v1712149830/tutorial-content/video-corsi/ngrx/image-keychains/github-1.jpg",
+            "type": "wood"
+          },
+          "qty": 3
+        },
+        {
+          "product": {
+            "id": 3,
+            "name": "Angular #1",
+            "cost": 3,
+            "image": "https://res.cloudinary.com/my-notes-demo/image/upload/v1712149827/tutorial-content/video-corsi/ngrx/image-keychains/angular-1.jpg",
+            "type": "wood"
+          },
+          "qty": 1
+        },
+        {
+          "product": {
+            "id": 5,
+            "name": "React",
+            "cost": 3,
+            "image": "https://res.cloudinary.com/my-notes-demo/image/upload/v1712149835/tutorial-content/video-corsi/ngrx/image-keychains/react.jpg",
+            "type": "wood"
+          },
+          "qty": 1
+        }
+      ],
+      "id": 4
+    },
+    {
+      "user": {
+        "email": "mario@rossi.com",
+        "address": "Via Abc 123",
+        "city": "Milan",
+        "state": "Italy",
+        "zip": "12345"
+      },
+      "cart": [
+        {
+          "product": {
+            "id": 2,
+            "name": "GitHub #2",
+            "cost": 3,
+            "image": "https://res.cloudinary.com/my-notes-demo/image/upload/v1712149830/tutorial-content/video-corsi/ngrx/image-keychains/github-1.jpg",
+            "type": "wood"
+          },
+          "qty": 3
+        },
+        {
+          "product": {
+            "id": 3,
+            "name": "Angular #1",
+            "cost": 3,
+            "image": "https://res.cloudinary.com/my-notes-demo/image/upload/v1712149827/tutorial-content/video-corsi/ngrx/image-keychains/angular-1.jpg",
+            "type": "wood"
+          },
+          "qty": 2
+        }
+      ],
+      "id": 5
+    },
+    {
+      "user": {
+        "email": "ewfw",
+        "address": "ewfew",
+        "city": "ewf",
+        "state": "ewfew",
+        "zip": "ewf"
+      },
+      "cart": [
+        {
+          "product": {
+            "id": 3,
+            "name": "Angular #1",
+            "cost": 3,
+            "image": "https://res.cloudinary.com/my-notes-demo/image/upload/v1712149827/tutorial-content/video-corsi/ngrx/image-keychains/angular-1.jpg",
+            "type": "wood"
+          },
+          "qty": 2
+        },
+        {
+          "product": {
+            "id": 2,
+            "name": "GitHub #2",
+            "cost": 3,
+            "image": "https://res.cloudinary.com/my-notes-demo/image/upload/v1712149830/tutorial-content/video-corsi/ngrx/image-keychains/github-1.jpg",
+            "type": "wood"
+          },
+          "qty": 1
+        }
+      ],
+      "id": 6
+    }
   ]
 }
