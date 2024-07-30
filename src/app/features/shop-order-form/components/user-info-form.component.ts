@@ -90,7 +90,7 @@ import { OrderUserForm } from '../../../model/order-user-form';
       </form>
     </section>
 
-    <!--<pre>{{form.value | json}}</pre>-->
+    <pre>{{form.value | json}}</pre>
   `,
   styles: ``
 })
