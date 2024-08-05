@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject } from '@angular/core';
-import { catchError, delay, map, mergeMap, of } from 'rxjs';
+import { catchError, map, mergeMap, of } from 'rxjs';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Product } from '../../../model/product';
 import { ProductsActions } from './products.actions';
@@ -37,8 +37,7 @@ export const deleteProduct = createEffect((
       mergeMap((action) =>
         http.delete(`http://localhost:3001/products/${action.id}`)
           .pipe(
-            delay(1000),
-            map((items) =>
+            map(() =>
               ProductsActions.deleteProductSuccess({ id: action.id })
             ),
             catchError(() =>
@@ -59,7 +58,7 @@ export const addProduct = createEffect((
     return actions$.pipe(
       ofType(ProductsActions.addProduct),
       mergeMap((action) =>
-        http.post<Product>(`http://localhost:3001/products1`, action.item)
+        http.post<Product>(`http://localhost:3001/products`, action.item)
           .pipe(
             map((item) =>
               ProductsActions.addProductSuccess({ item })
@@ -74,3 +73,26 @@ export const addProduct = createEffect((
   { functional: true}
 );
 
+
+
+export const editProduct = createEffect((
+    actions$ = inject(Actions),
+    http = inject(HttpClient)
+  ) => {
+    return actions$.pipe(
+      ofType(ProductsActions.editProduct),
+      mergeMap((action) =>
+        http.patch<Product>(`http://localhost:3001/products/${action.item.id}`, action.item)
+          .pipe(
+            map((item) =>
+              ProductsActions.editProductSuccess({ item })
+            ),
+            catchError(() =>
+              of(ProductsActions.editProductFail())
+            )
+          )
+      )
+    );
+  },
+  { functional: true}
+);

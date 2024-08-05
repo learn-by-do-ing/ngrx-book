@@ -3,6 +3,7 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { ProductsActions } from '../../core/store/products/products.actions';
 import {
+  selectActive,
   selectHasError,
   selectIsPanelOpened,
   selectList,
@@ -23,7 +24,10 @@ import { Product } from '../../model/product';
 
     <div class="flex items-center gap-1">
       <!--ADD-->
-      <div class="m-6 cursor-pointer" (click)="openModalToAddProduct()">
+      <button
+        class="m-6 cursor-pointer" 
+        (click)="openModalToAddProduct()"
+      >
         <svg
           width="30"
           viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -37,7 +41,7 @@ import { Product } from '../../model/product';
               stroke="#ffffff" stroke-width="1.5" stroke-linecap="round"></path>
           </g>
         </svg>
-      </div>
+      </button>
 
       <!--PENDING-->
       @if (pending()) {
@@ -51,7 +55,7 @@ import { Product } from '../../model/product';
         <h3 class="font-bold text-2lg m-3">
           ADD ITEM
         </h3>
-        <form [formGroup]="form" (submit)="addProduct()" class="flex flex-col gap-3">
+        <form [formGroup]="form" (submit)="saveProduct()" class="flex flex-col gap-3">
           <input
             type="text" placeholder="Product name" class="input input-bordered w-full max-w-xs"
             formControlName="name"
@@ -79,7 +83,10 @@ import { Product } from '../../model/product';
 
         <tbody>
           @for (product of products(); track product.id) {
-            <tr>
+            <tr
+              (click)="openModalToEditProduct(product)"
+              class="hover:bg-base-200 cursor-pointer"
+            >
               <th>
                 <img [src]="product.image" alt="" width="50">
               </th>
@@ -89,7 +96,7 @@ import { Product } from '../../model/product';
                 € {{ product.cost }}
                 <button
                   class="btn ml-2"
-                  (click)="deleteProduct(product)">Delete
+                  (click)="deleteProduct(product, $event)">Delete
                 </button>
               </td>
             </tr>
@@ -111,6 +118,8 @@ export default class CmsComponent implements OnInit {
   pending = this.store.selectSignal(selectPending);
   products = this.store.selectSignal(selectList);
   isModalOpened = this.store.selectSignal(selectIsPanelOpened);
+  // NEW
+  active = this.store.selectSignal(selectActive);
 
   form = this.fb.nonNullable.group({
     name: ['', [Validators.required]]
@@ -120,20 +129,44 @@ export default class CmsComponent implements OnInit {
     this.store.dispatch(ProductsActions.load())
   }
 
-  deleteProduct(product: Product) {
+  deleteProduct(product: Product, event: MouseEvent) {
+    event.stopPropagation()
     this.store.dispatch(ProductsActions.deleteProduct({ id: product.id }))
   }
 
   openModalToAddProduct() {
     this.store.dispatch(ProductsActions.openModalAdd())
+    this.form.reset()
+  }
+
+  // NEW
+  openModalToEditProduct(product: Product) {
+    this.store.dispatch(ProductsActions.openModalEdit({ item: product}))
+    this.form.patchValue(product)
   }
 
   closeModal() {
     this.store.dispatch(ProductsActions.closeModal())
   }
 
+  saveProduct() {
+    if (this.active()) {
+      this.editProduct()
+    } else {
+      this.addProduct()
+    }
+  }
+
   addProduct() {
     this.store.dispatch(ProductsActions.addProduct({ item: this.form.value}))
+  }
+
+  editProduct() {
+    const editedProduct = {
+      ...this.form.value,
+      id: this.active()?.id
+    }
+    this.store.dispatch(ProductsActions.editProduct({ item: editedProduct }))
   }
 
 }
