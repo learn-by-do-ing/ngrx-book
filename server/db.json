@@ -365,38 +365,6 @@
         }
       ],
       "id": 5
-    },
-    {
-      "user": {
-        "email": "ewfw",
-        "address": "ewfew",
-        "city": "ewf",
-        "state": "ewfew",
-        "zip": "ewf"
-      },
-      "cart": [
-        {
-          "product": {
-            "id": 3,
-            "name": "Angular #1",
-            "cost": 3,
-            "image": "https://res.cloudinary.com/my-notes-demo/image/upload/v1712149827/tutorial-content/video-corsi/ngrx/image-keychains/angular-1.jpg",
-            "type": "wood"
-          },
-          "qty": 2
-        },
-        {
-          "product": {
-            "id": 2,
-            "name": "GitHub #2",
-            "cost": 3,
-            "image": "https://res.cloudinary.com/my-notes-demo/image/upload/v1712149830/tutorial-content/video-corsi/ngrx/image-keychains/github-1.jpg",
-            "type": "wood"
-          },
-          "qty": 1
-        }
-      ],
-      "id": 6
     }
   ]
 }
