@@ -1,7 +1,13 @@
 import { Component, inject, OnInit } from '@angular/core';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { ProductsActions } from '../../core/store/products/products.actions';
-import { selectHasError, selectList, selectPending } from '../../core/store/products/products.feature';
+import {
+  selectHasError,
+  selectIsPanelOpened,
+  selectList,
+  selectPending
+} from '../../core/store/products/products.feature';
 import { Product } from '../../model/product';
 
 @Component({
@@ -17,29 +23,44 @@ import { Product } from '../../model/product';
 
     <div class="flex items-center gap-1">
       <!--ADD-->
-      <div class="m-6 cursor-pointer">
+      <div class="m-6 cursor-pointer" (click)="openModalToAddProduct()">
         <svg
           width="30"
-          viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M15 12L12 12M12 12L9 12M12 12L12 9M12 12L12 15" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round"></path> <path d="M7 3.33782C8.47087 2.48697 10.1786 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 10.1786 2.48697 8.47087 3.33782 7" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round"></path> </g></svg>
+          viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+          <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+          <g id="SVGRepo_iconCarrier">
+            <path d="M15 12L12 12M12 12L9 12M12 12L12 9M12 12L12 15" stroke="#ffffff" stroke-width="1.5"
+                  stroke-linecap="round"></path>
+            <path
+              d="M7 3.33782C8.47087 2.48697 10.1786 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 10.1786 2.48697 8.47087 3.33782 7"
+              stroke="#ffffff" stroke-width="1.5" stroke-linecap="round"></path>
+          </g>
+        </svg>
       </div>
 
       <!--PENDING-->
-      @if(pending()) {
+      @if (pending()) {
         <span class="loading loading-spinner loading-md"></span>
       }
     </div>
 
     <!--FORM EDIT / ADD-->
-    <dialog class="modal " [open]="false">
-      <div class="modal-box ">
-        <h3 class="font-bold text-2lg">
-          ADD / EDIT item
+    <dialog class="modal bg-black bg-opacity-85" [open]="isModalOpened()">
+      <div class="modal-box">
+        <h3 class="font-bold text-2lg m-3">
+          ADD ITEM
         </h3>
-        <div class="modal-action modal-backdrop" >
-          <form class="modal-backdrop">
-            <button class="btn">Save</button>
-          </form>
-        </div>
+        <form [formGroup]="form" (submit)="addProduct()" class="flex flex-col gap-3">
+          <input
+            type="text" placeholder="Product name" class="input input-bordered w-full max-w-xs"
+            formControlName="name"
+          />
+          <div class="flex gap-2">
+            <button class="btn" type="button" (click)="closeModal()">Close</button>
+            <button class="btn" type="submit" [disabled]="form.invalid">Save</button>          
+          </div>
+        </form>
       </div>
     </dialog>
 
@@ -57,18 +78,19 @@ import { Product } from '../../model/product';
         </thead>
 
         <tbody>
-          @for(product of products(); track product.id) {
+          @for (product of products(); track product.id) {
             <tr>
               <th>
                 <img [src]="product.image" alt="" width="50">
               </th>
-              <td>{{product.name}}</td>
+              <td>{{ product.name }}</td>
               <td>{{ product.type }}</td>
               <td>
-                € {{product.cost}}
+                € {{ product.cost }}
                 <button
                   class="btn ml-2"
-                  (click)="deleteProduct(product)">Delete</button>
+                  (click)="deleteProduct(product)">Delete
+                </button>
               </td>
             </tr>
           }
@@ -77,22 +99,41 @@ import { Product } from '../../model/product';
     </div>
 
   `,
+  imports: [
+    ReactiveFormsModule
+  ],
   styles: ``
 })
 export default class CmsComponent implements OnInit {
   store = inject(Store)
-
+  fb = inject(FormBuilder)
   error = this.store.selectSignal(selectHasError);
   pending = this.store.selectSignal(selectPending);
   products = this.store.selectSignal(selectList);
+  isModalOpened = this.store.selectSignal(selectIsPanelOpened);
+
+  form = this.fb.nonNullable.group({
+    name: ['', [Validators.required]]
+  })
 
   ngOnInit() {
     this.store.dispatch(ProductsActions.load())
   }
 
-  // NEW
   deleteProduct(product: Product) {
     this.store.dispatch(ProductsActions.deleteProduct({ id: product.id }))
+  }
+
+  openModalToAddProduct() {
+    this.store.dispatch(ProductsActions.openModalAdd())
+  }
+
+  closeModal() {
+    this.store.dispatch(ProductsActions.closeModal())
+  }
+
+  addProduct() {
+    this.store.dispatch(ProductsActions.addProduct({ item: this.form.value}))
   }
 
 }
