@@ -6,13 +6,6 @@
   ],
   "products": [
     {
-      "name": "Coaster",
-      "id": 11,
-      "cost": 3,
-      "image": "https://res.cloudinary.com/my-notes-demo/image/upload/v1712217743/tutorial-content/video-corsi/ngrx/image-keychains/coaster.jpg",
-      "type": "paper"
-    },
-    {
       "name": "KeyChain Big",
       "id": 12,
       "cost": 4,
@@ -53,22 +46,6 @@
       "cost": 5,
       "image": "https://res.cloudinary.com/my-notes-demo/image/upload/v1712217750/tutorial-content/video-corsi/ngrx/image-keychains/tape.jpg",
       "type": "paper"
-    },
-    {
-      "name": "wefew",
-      "id": 18
-    },
-    {
-      "name": "ewfe",
-      "id": 19
-    },
-    {
-      "name": "new item",
-      "id": 20
-    },
-    {
-      "name": "new item",
-      "id": 21
     }
   ],
   "orders": []

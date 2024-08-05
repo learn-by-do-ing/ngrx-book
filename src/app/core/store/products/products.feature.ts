@@ -53,7 +53,7 @@ export const productsFeature = createFeature({
       hasError: true,
       pending: false
     })),
-
+    // ADD
     on(ProductsActions.addProduct, (state): ProductsState => ({
       ...state,
       hasError: false,
@@ -72,7 +72,6 @@ export const productsFeature = createFeature({
       pending: false,
       isPanelOpened: false
     })),
-
     // EDIT
     on(ProductsActions.editProduct, (state): ProductsState => ({
       ...state,
@@ -105,5 +104,5 @@ export const {
   selectPending,
   selectList,
   selectIsPanelOpened,
-  selectActive // NEW
+  selectActive
 } = productsFeature;
