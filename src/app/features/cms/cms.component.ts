@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { ProductsActions } from '../../core/store/products/products.actions';
 import {
@@ -20,10 +20,11 @@ import { CmsProductsModalComponent } from './components/cms-products-modal.compo
   template: `
 
     <app-cms-products-bar
-      [error]="error()"
       [pending]="pending()"
-      (addProduct)="openModalToAddProduct()"
+      [error]="error()"
+      (openModal)="openModalToAddProduct()"
     />
+    
     <app-cms-products-modal
       [isModalOpened]="isModalOpened()"
       [active]="active()"
@@ -33,22 +34,21 @@ import { CmsProductsModalComponent } from './components/cms-products-modal.compo
 
     <app-cms-products-list
       [products]="products()"
-      (openModalToEditProduct)="openModalToEditProduct($event)"
       (deleteProduct)="deleteProduct($event)"
+      (openModal)="openModalToEditProduct($event)"
     />
-
+  
   `,
   imports: [
     ReactiveFormsModule,
+    CmsProductsBarComponent,
     CmsProductsListComponent,
-    CmsProductsModalComponent,
-    CmsProductsBarComponent
+    CmsProductsModalComponent
   ],
   styles: ``
 })
 export default class CmsComponent implements OnInit {
   store = inject(Store)
-
   error = this.store.selectSignal(selectHasError);
   pending = this.store.selectSignal(selectPending);
   products = this.store.selectSignal(selectList);
@@ -65,13 +65,10 @@ export default class CmsComponent implements OnInit {
 
   openModalToAddProduct() {
     this.store.dispatch(ProductsActions.openModalAdd())
-    // this.form.reset()
   }
 
-  // NEW
   openModalToEditProduct(product: Product) {
     this.store.dispatch(ProductsActions.openModalEdit({ item: product}))
-    // this.form.patchValue(product)
   }
 
   closeModal() {
@@ -79,8 +76,7 @@ export default class CmsComponent implements OnInit {
   }
 
   saveProduct(product: Partial<Product>) {
-    this.store.dispatch(ProductsActions.save({ item: product }))
+    this.store.dispatch(ProductsActions.save({ item: product}))
   }
 
 }
-

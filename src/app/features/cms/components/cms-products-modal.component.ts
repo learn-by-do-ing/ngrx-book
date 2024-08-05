@@ -18,7 +18,7 @@ import { Product } from '../../../model/product';
         </h3>
         <form 
           [formGroup]="form" 
-          (submit)="saveProduct.emit(form.value)"
+          (submit)="saveProduct.emit(form.value)" 
           class="flex flex-col gap-3"
         >
           <input
@@ -36,10 +36,10 @@ import { Product } from '../../../model/product';
   styles: ``
 })
 export class CmsProductsModalComponent {
-  isModalOpened = input.required<boolean>()
-  active = input.required<Partial<Product> | null >()
-  saveProduct = output<Partial<Product>>()
+  isModalOpened = input.required<boolean>();
+  active = input.required<Partial<Product> | null>()
   closeModal = output()
+  saveProduct = output<Partial<Product>>()
 
   fb = inject(FormBuilder)
 
@@ -49,7 +49,7 @@ export class CmsProductsModalComponent {
 
   constructor() {
     effect(() => {
-      const active = this.active();
+      const active = this.active()
       if (active) {
         this.form.patchValue(active)
       } else {

@@ -5,18 +5,16 @@ import { Component, input, output } from '@angular/core';
   standalone: true,
   imports: [],
   template: `
-
     <!--ERROR ALERT-->
     @if (error()) {
       <div class="alert alert-error">Server error</div>
     }
 
-
     <div class="flex items-center gap-1">
       <!--ADD-->
       <button
         class="m-6 cursor-pointer"
-        (click)="addProduct.emit()"
+        (click)="openModal.emit()"
       >
         <svg
           width="30"
@@ -45,6 +43,5 @@ import { Component, input, output } from '@angular/core';
 export class CmsProductsBarComponent {
   error = input.required<boolean>()
   pending = input.required<boolean>()
-
-  addProduct = output()
+  openModal = output()
 }

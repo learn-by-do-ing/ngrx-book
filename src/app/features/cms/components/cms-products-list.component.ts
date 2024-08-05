@@ -6,7 +6,6 @@ import { Product } from '../../../model/product';
   standalone: true,
   imports: [],
   template: `
-    <!--LIST-->
     <div class="overflow-x-auto">
       <table class="table">
         <!-- head -->
@@ -22,7 +21,7 @@ import { Product } from '../../../model/product';
         <tbody>
           @for (product of products(); track product.id) {
             <tr
-              (click)="openModalToEditProduct.emit(product)"
+              (click)="openModal.emit(product)"
               class="hover:bg-base-200 cursor-pointer"
             >
               <th>
@@ -42,13 +41,14 @@ import { Product } from '../../../model/product';
         </tbody>
       </table>
     </div>
+
   `,
   styles: ``
 })
 export class CmsProductsListComponent {
   products = input.required<Product[]>()
   deleteProduct = output<Product>()
-  openModalToEditProduct = output<Product>()
+  openModal = output<Product>()
 
   deleteProductHandler(product: Product, event: MouseEvent) {
     event.stopPropagation()
