@@ -14,7 +14,7 @@ import { Product } from '../../../model/product';
     <dialog class="modal bg-black bg-opacity-85" [open]="isModalOpened()">
       <div class="modal-box">
         <h3 class="font-bold text-2lg m-3">
-          ADD ITEM
+          {{active() ? 'EDIT' : 'ADD'}} ITEM
         </h3>
         <form 
           [formGroup]="form" 
