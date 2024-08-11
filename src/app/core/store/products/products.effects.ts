@@ -63,7 +63,7 @@ export const saveProduct = createEffect((
       map(([action, active]) => {
         if (active?.id) {
           // edit
-          const editedProduct = { ...action.item, id: active.id }
+          const editedProduct: Partial<Product> = { ...action.item, id: active.id }
           return ProductsActions.editProduct({ item: editedProduct })
         }
         //add
