@@ -12,6 +12,8 @@ import { NavBarComponent } from './core/components/nav-bar.component';
     <div class="max-w-screen-xl mx-6 xl:mx-auto ">
       <router-outlet></router-outlet>
     </div>
+    
+    
   `,
   styles: [],
 })

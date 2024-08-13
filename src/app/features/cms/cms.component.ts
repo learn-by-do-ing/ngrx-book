@@ -49,11 +49,11 @@ import { CmsProductsModalComponent } from './components/cms-products-modal.compo
 })
 export default class CmsComponent implements OnInit {
   store = inject(Store)
-  error = this.store.selectSignal(selectHasError);
-  pending = this.store.selectSignal(selectPending);
-  products = this.store.selectSignal(selectList);
-  isModalOpened = this.store.selectSignal(selectIsPanelOpened);
-  active = this.store.selectSignal(selectActive);
+  error = this.store.selectSignal<boolean>(selectHasError);
+  pending = this.store.selectSignal<boolean>(selectPending);
+  products = this.store.selectSignal<Product[]>(selectList);
+  isModalOpened = this.store.selectSignal<boolean>(selectIsPanelOpened);
+  active = this.store.selectSignal<Partial<Product> | null>(selectActive);
 
   ngOnInit() {
     this.store.dispatch(ProductsActions.load())

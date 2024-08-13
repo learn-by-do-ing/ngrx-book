@@ -5,6 +5,7 @@ import {
   selectTotalCartCost,
 } from '../../core/store/cart/cart.feature';
 import { OrderActions } from '../../core/store/cart/order.actions';
+import { CartItem } from '../../model/cart-item';
 import { OrderUserForm } from '../../model/order-user-form';
 import { UserCartSummaryComponent } from './components/user-cart-summary.component';
 import { UserInfoFormComponent } from './components/user-info-form.component';
@@ -38,7 +39,7 @@ import { UserInfoFormComponent } from './components/user-info-form.component';
 })
 export default class ShopOrderFormComponent {
   store = inject(Store)
-  cartList = this.store.selectSignal(selectList)
+  cartList = this.store.selectSignal<CartItem[]>(selectList)
   totalCost = this.store.selectSignal(selectTotalCartCost)
 
   sendOrder(formData: OrderUserForm) {

@@ -54,7 +54,7 @@ export default class ShopComponent implements OnInit {
   store = inject(Store)
   products = this.store.selectSignal(selectFilteredList)
   isOpen = this.store.selectSignal(selectSidePanelOpened)
-  filters = this.store.selectSignal(selectShopFiltersState)
+  filters = this.store.selectSignal<ShopFilters>(selectShopFiltersState)
 
   constructor() {
     effect(() => {

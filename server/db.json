@@ -1,17 +1,16 @@
 {
+  "login": {
+    "token": "abc123"
+  },
+  "profile": {
+    "displayName": "Fabio Biondi"
+  },
   "category": [
     "wood",
     "plastic",
     "paper"
   ],
   "products": [
-    {
-      "id": 1,
-      "name": "GitHub #1",
-      "cost": 3,
-      "image": "https://res.cloudinary.com/my-notes-demo/image/upload/v1712149831/tutorial-content/video-corsi/ngrx/image-keychains/github-2.jpg",
-      "type": "wood"
-    },
     {
       "id": 2,
       "name": "GitHub #2",
@@ -69,13 +68,6 @@
       "type": "plastic"
     },
     {
-      "name": "Coaster",
-      "id": 11,
-      "cost": 3,
-      "image": "https://res.cloudinary.com/my-notes-demo/image/upload/v1712217743/tutorial-content/video-corsi/ngrx/image-keychains/coaster.jpg",
-      "type": "paper"
-    },
-    {
       "name": "KeyChain Big",
       "id": 12,
       "cost": 4,
@@ -111,11 +103,8 @@
       "type": "plastic"
     },
     {
-      "name": "Tape",
-      "id": 17,
-      "cost": 5,
-      "image": "https://res.cloudinary.com/my-notes-demo/image/upload/v1712217750/tutorial-content/video-corsi/ngrx/image-keychains/tape.jpg",
-      "type": "paper"
+      "name": "new Item 123",
+      "id": 17
     }
   ],
   "orders": []
