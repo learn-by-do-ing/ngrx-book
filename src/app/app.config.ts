@@ -34,7 +34,7 @@ export const appConfig: ApplicationConfig = {
     provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),
     //provideState({ name: productsFeature.name, reducer: productsFeature.reducer }),
     provideState(productsFeature),
-    provideState({ name: 'auth', reducer: authFeature.reducer }), // NEW
+    provideState({ name: authFeature.name, reducer: authFeature.reducer }), // NEW
     provideState({ name: cartFeature.name, reducer: cartFeature.reducer }),
     provideState({ name: shopFiltersFeature.name, reducer: shopFiltersFeature.reducer }),
     provideState({ name: UIFeature.name, reducer: UIFeature.reducer }),
